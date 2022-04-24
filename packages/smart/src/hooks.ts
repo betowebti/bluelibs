@@ -121,6 +121,13 @@ export const useSmart = <T extends Smart>(
   },
   options?: UseSmartOptions
 ): T => {
+  if (!window.sessionStorage.getItem("isKernelInitialized")) {
+    setTimeout(() => {
+      if (!window.sessionStorage.getItem("isKernelInitialized")) {
+        throw new Error(`you cant use smart before kernel got initialized`);
+      }
+    });
+  }
   const model = useContext<T>((modelClass as any).getContext());
 
   if (!model) {

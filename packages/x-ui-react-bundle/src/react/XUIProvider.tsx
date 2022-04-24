@@ -34,6 +34,7 @@ export const XUIProvider = (props: IXUIProviderProps) => {
       .init()
       .then(() => {
         setIsInitialized(true);
+        sessionStorage.setItem("isKernelInitialized", "true");
       })
       .catch((err) => {
         console.error(err);
